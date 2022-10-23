@@ -1,0 +1,44 @@
+version: "3.7"
+# earliest version w/ feature "build target" is Docker Compose's v3.4
+# source: https://docs.docker.com/compose/compose-file/compose-file-v3/#target
+
+services:
+  #############################################################################
+  #   _   _ _                 _                                               #
+  # | | | | |__  _   _ _ __ | |_ _   _                                        #
+  # | | | | '_ \| | | | '_ \| __| | | |                                       #
+  # | |_| | |_) | |_| | | | | |_| |_| |                                       #
+  #  \___/|_.__/ \__,_|_| |_|\__|\__,_|                                       #
+  #                                                                           #
+  #############################################################################
+
+  dind-lint:
+    image: ${REGISTRY_URL_REG_DOMAIN_W_USERNAME}/${REGISTRY_REPO_NAME}:dind-lint-py-v3.10-dind-v20.10-git-v2.25-precommit-v2.20
+    build:
+      context: .
+      dockerfile: 1-lean-lint-package.Dockerfile
+      args:
+        BASE_IMAGE: ${BASE_IMAGE}
+        PYTHON3_VERSION: "3.10"
+        PIP_PACKAGES_TO_INSTALL_SPACE_SPEARATED: pre-commit
+
+  dind-package:
+    image: ${REGISTRY_URL_REG_DOMAIN_W_USERNAME}/${REGISTRY_REPO_NAME}:dind-package-py-v3.10-dind-v20.10-git-v2.25-dockercompose-v1.29
+    build:
+      context: .
+      dockerfile: 1-lean-lint-package.Dockerfile
+      args:
+        BASE_IMAGE: ${BASE_IMAGE}
+        PYTHON3_VERSION: "3.10"
+        PIP_PACKAGES_TO_INSTALL_SPACE_SPEARATED: docker-compose
+
+  dind-package-publish:
+    image: ${REGISTRY_URL_REG_DOMAIN_W_USERNAME}/${REGISTRY_REPO_NAME}:dind-package-publish-py-v3.10-dind-v20.10-git-v2.25-dockercompose-v1.29-awscli-v2.7
+    build:
+      context: .
+      dockerfile: 2-advanced-publish-aws-ecr.Dockerfile
+      args:
+        BASE_IMAGE: ${REGISTRY_URL_REG_DOMAIN_W_USERNAME}/${REGISTRY_REPO_NAME}:dind-package-py-v3.10-dind-v20.10-git-v2.25-dockercompose-v1.29
+        AWS_CLI_VERSION: ${AWS_CLI_VERSION}
+        AWS_CLI_CHECKSUM: ${AWS_CLI_CHECKSUM}
+        PIP_PACKAGES_TO_INSTALL_SPACE_SPEARATED: docker-compose
