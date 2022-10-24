@@ -25,22 +25,22 @@ services:
         PIP_PACKAGES_TO_INSTALL_SPACE_SPEARATED: "pre-commit"
 
   dind-package-py38:
-    image: ${REGISTRY_URL_REG_DOMAIN_W_USERNAME}/${REGISTRY_REPO_NAME}:ubuntu-package-py-v3.8-docker-v20.10-git-v2.25-dockercompose-v1.29
+    image: ${REGISTRY_URL_REG_DOMAIN_W_USERNAME}/${REGISTRY_REPO_NAME}:ubuntu-package-py-v3.8-docker-v20.10-git-v2.25-precommit-v2.20-dockercompose-v1.29
     build:
       context: .
       dockerfile: 1-lean-lint-package.Dockerfile
       args:
         BASE_IMAGE: ${BASE_IMAGE}
         PYTHON3_VERSION: "3.8"
-        PIP_PACKAGES_TO_INSTALL_SPACE_SPEARATED: "docker-compose"
+        PIP_PACKAGES_TO_INSTALL_SPACE_SPEARATED: "docker-compose pre-commit"
 
   dind-package-publish-py38:
-    image: ${REGISTRY_URL_REG_DOMAIN_W_USERNAME}/${REGISTRY_REPO_NAME}:ubuntu-package-publish-py-v3.8-docker-v20.10-git-v2.25-dockercompose-v1.29-awscli-v2.7
+    image: ${REGISTRY_URL_REG_DOMAIN_W_USERNAME}/${REGISTRY_REPO_NAME}:ubuntu-package-publish-py-v3.8-docker-v20.10-git-v2.25-precommit-v2.20-dockercompose-v1.29-awscli-v2.7
     build:
       context: .
       dockerfile: 2-advanced-publish-aws-ecr.Dockerfile
       args:
-        BASE_IMAGE: ${REGISTRY_URL_REG_DOMAIN_W_USERNAME}/${REGISTRY_REPO_NAME}:ubuntu-package-py-v3.8-docker-v20.10-git-v2.25-dockercompose-v1.29
+        BASE_IMAGE: ${REGISTRY_URL_REG_DOMAIN_W_USERNAME}/${REGISTRY_REPO_NAME}:ubuntu-package-py-v3.8-docker-v20.10-git-v2.25-precommit-v2.20-dockercompose-v1.29
         AWS_CLI_VERSION: ${AWS_CLI_VERSION}
         AWS_CLI_CHECKSUM: ${AWS_CLI_CHECKSUM}
         PIP_PACKAGES_TO_INSTALL_SPACE_SPEARATED: "docker-compose"
@@ -58,22 +58,21 @@ services:
         PIP_PACKAGES_TO_INSTALL_SPACE_SPEARATED: "pre-commit"
 
   dind-package-py310:
-    image: ${REGISTRY_URL_REG_DOMAIN_W_USERNAME}/${REGISTRY_REPO_NAME}:ubuntu-package-py-v3.10-docker-v20.10-git-v2.25-dockercompose-v1.29
+    image: ${REGISTRY_URL_REG_DOMAIN_W_USERNAME}/${REGISTRY_REPO_NAME}:ubuntu-package-py-v3.10-docker-v20.10-git-v2.25-precommit-v2.20-dockercompose-v1.29
     build:
       context: .
       dockerfile: 1-lean-lint-package.Dockerfile
       args:
         BASE_IMAGE: ${BASE_IMAGE}
         PYTHON3_VERSION: "3.10"
-        PIP_PACKAGES_TO_INSTALL_SPACE_SPEARATED: "docker-compose"
+        PIP_PACKAGES_TO_INSTALL_SPACE_SPEARATED: "docker-compose pre-commit"
 
   dind-package-publish-py310:
-    image: ${REGISTRY_URL_REG_DOMAIN_W_USERNAME}/${REGISTRY_REPO_NAME}:ubuntu-package-publish-py-v3.10-docker-v20.10-git-v2.25-dockercompose-v1.29-awscli-v2.7
+    image: ${REGISTRY_URL_REG_DOMAIN_W_USERNAME}/${REGISTRY_REPO_NAME}:ubuntu-package-publish-py-v3.10-docker-v20.10-git-v2.25-precommit-v2.20-dockercompose-v1.29-awscli-v2.7
     build:
       context: .
       dockerfile: 2-advanced-publish-aws-ecr.Dockerfile
       args:
-        BASE_IMAGE: ${REGISTRY_URL_REG_DOMAIN_W_USERNAME}/${REGISTRY_REPO_NAME}:ubuntu-package-py-v3.10-docker-v20.10-git-v2.25-dockercompose-v1.29
+        BASE_IMAGE: ${REGISTRY_URL_REG_DOMAIN_W_USERNAME}/${REGISTRY_REPO_NAME}:ubuntu-package-py-v3.10-docker-v20.10-git-v2.25-precommit-v2.20-dockercompose-v1.29
         AWS_CLI_VERSION: ${AWS_CLI_VERSION}
         AWS_CLI_CHECKSUM: ${AWS_CLI_CHECKSUM}
-        PIP_PACKAGES_TO_INSTALL_SPACE_SPEARATED: "docker-compose"
