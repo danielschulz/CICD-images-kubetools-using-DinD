@@ -3,6 +3,10 @@
 .vscode
 .netbeans
 
+# omit files from local container tests
+.bash_history
+.gitconfig
+
 # do not store Daniel's notes file
 images/build-jarvis-images.txt
 images/commands-simplification.txt
@@ -11,7 +15,6 @@ images/.env
 
 # effective file to utilize once building, where all parameters have been replaced w/ specific values
 **/kube-tools-docker-compose-w-names.yml
-ubuntu-based/kube-tools-docker-compose-w-names.yml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
